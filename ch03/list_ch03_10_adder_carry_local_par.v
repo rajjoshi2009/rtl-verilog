@@ -1,0 +1,23 @@
+// Listing 3.10
+module adder_carry_local_par
+   (
+    input wire [3:0] a, b,
+    output wire [3:0] sum,
+    output wire cout  // carry-out
+   );
+
+   // constant declaration
+   /*Verilog HDL local parameters are identical to parameters 	except that they cannot directly be modified by defparam 	statements or module instance parameter value 	assignments. Local parameters can be assigned constant 	expressions containing parameters, which can be modified 	with defparam statements or module instance parameter 	value assignments.*/
+
+   localparam N = 4,
+              N1 = N-1;
+
+   // signal declaration
+   wire [N:0] sum_ext;
+
+   //body
+   assign sum_ext = {1'b0, a} + {1'b0, b};
+   assign sum = sum_ext[N1:0];
+   assign cout= sum_ext[N];
+
+endmodule
